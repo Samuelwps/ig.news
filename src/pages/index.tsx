@@ -1,5 +1,5 @@
 import styles from "./home.module.scss"
-import  Head  from 'next/head'
+import  Head  from '../../node_modules/next/head'
 import { GetStaticProps } from 'next'
 import { SubscribeButton } from "../components/SubscribeButton/index"
 
@@ -42,7 +42,10 @@ export const getStaticProps:GetStaticProps = async () =>{
   
   const product = {
     priceId: price.id,
-    amount: (price.unit_amount / 100),
+    amount: new Intl.NumberFormat("en-US", {
+      style:"currency",
+      currency: "USD",
+    }).format(price.unit_amount / 100),
   }
 
   return{
