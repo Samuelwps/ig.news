@@ -1,5 +1,5 @@
 import styles from "./home.module.scss"
-import  Head  from '../../node_modules/next/head'
+import  Head  from "next/head"
 import { GetStaticProps } from 'next'
 import { SubscribeButton } from "../components/SubscribeButton/index"
 
@@ -51,6 +51,7 @@ export const getStaticProps:GetStaticProps = async () =>{
   return{
     props:{
       product,
-    }
+    },
+    revalidate: 60 * 60 * 24, //24 Horas
   }
 }

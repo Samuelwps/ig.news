@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss"
-import {FaGithub} from "../../../node_modules/react-icons/fa/index"
-import {FiX} from "../../../node_modules/react-icons/fi/index"
+import {FaGithub} from "react-icons/fa"
+import {FiX} from "react-icons/fi"
 
 export function SignInButton(){
     const isUserLoggedIn = false
