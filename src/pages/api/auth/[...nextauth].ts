@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
-import { query as q }from "faunadb"
+import { Casefold, query as q }from "faunadb"
 import {fauna} from "../../../services/faubadb"
 
 
@@ -27,15 +27,30 @@ export default NextAuth({
       const {email} = user
       
       try{
-        await fauna.query(
+        q.If(
+          q.Not(
+            q.Exists(
+              q.Match(
+                q.Index("user_by_email"),
+                q.Casefold(user.email)
+              )
+            )
+          ),
           q.Create(
             q.Collection("users"),
             {data : {email}}
+          ),
+          q.Get(
+            q.Match(
+              q.Index("user_by_email"),
+              q.Casefold(user.email)
+            )
           )
         )
         return true
       } catch {
-        return true
+        return false 
+
       }
     },
   }
