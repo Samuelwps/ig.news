@@ -2,8 +2,7 @@ import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
 import { Casefold, query as q }from "faunadb"
-import {fauna} from "../../../services/faubadb"
-
+import { fauna } from "../../../services/faubadb"
 
 
 
